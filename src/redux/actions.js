@@ -28,3 +28,8 @@ export const fetchLocation = (textQuery) =>
             onFailure: data => toast(data.message || data)
         }
     })
+
+export const removeLocation = (location) => ({
+    type: actionTypes.REMOVE_LOCATION,
+    payload: location,
+})

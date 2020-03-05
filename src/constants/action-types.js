@@ -5,3 +5,4 @@ export const API_END = 'API_END';
 export const API_ERROR = 'API_ERROR';
 export const ShowLocations = 'ShowLocations';
 export const toast = 'toast'
+export const REMOVE_LOCATION = 'REMOVE_LOCATION'

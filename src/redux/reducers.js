@@ -1,10 +1,11 @@
 import produce from 'immer';
 import * as actions from '../constants/action-types'
+import _ from 'lodash'
 
 const initState = {
     locations: [],
     loading: false,
-    error: {},
+    error: null,
     autocomplete: []
 }
 
@@ -21,11 +22,15 @@ export default (state = initState, action) =>
                 draft.loading = false;
                 break;
             case actions.API_ERROR:
+                console.log('setting error:', action.payload)
                 draft.error = action.payload;
                 break;
             case actions.ShowLocations:
                 draft.autocomplete = action.payload;
                 break;
+            case actions.REMOVE_LOCATION:
+                _.remove(draft.locations, x => action.payload === x)
+            break;
             default:
                 break;
         }
