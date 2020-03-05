@@ -7,6 +7,7 @@ import useAutocompleteLocations from '../hooks/useAutocompleteLocations'
 import { useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { addLocation, removeLocation } from '../redux/actions'
+import _ from 'lodash'
 
 export function useSelectedLocations() {
     const locations = useSelector(state => state.locations)
@@ -19,11 +20,17 @@ export function useSelectedLocations() {
 }
 
 function AutocompleteInput() {
-    // const [open, setOpen] = useState(false)
     const { list, loading, search } = useAutocompleteLocations()
     const [inputValue, setInputValue] = useState("");
     const { locations, addLocation, removeLocation } = useSelectedLocations()
-    const [value, setValue] = useState([])
+    // const [valueArray, setValueArray] = useState([])
+
+    const handleChange = (event, valueArray) => {
+        _.difference(valueArray, locations).forEach(item => addLocation(item))
+        _.difference(locations, valueArray).forEach(item => removeLocation(item))
+
+        return locations;
+    }
 
     return (
         <>
@@ -32,20 +39,12 @@ function AutocompleteInput() {
                 filterSelectedOptions
                 autoComplete
                 style={{ width: 300 }}
-                // open
-                // onOpen={() => {
-                //     setOpen(true);
-                // }}
-                // onClose={() => {
-                //     setOpen(false);
-                // }}
                 getOptionSelected={(option, value) => option.key === value.key}
                 getOptionLabel={option => option.LocalizedName}
                 options={list}
                 loading={loading}
-                value={value}
-                onChange={(e, value) => setValue(value)}
-                // onSelect={(e) => e.}
+                value={locations}
+                onChange={handleChange}
                 inputValue={inputValue}
                 onInputChange={(_, value) => { setInputValue(value); search(value) }}
                 renderInput={params => (
