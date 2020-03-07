@@ -1,44 +1,29 @@
 import React, { } from 'react';
-import { Container, Form, Row, Col } from 'react-bootstrap';
-import useAutocompleteLocations from './hooks/useAutocompleteLocations';
+// import { Container, Row, Col } from 'react-bootstrap';
+import { Grid } from '@material-ui/core'
 import AutocompleteInput from './components/AutocompleteInput'
+import useSelectedLocations from './hooks/useSelectedLocations'
+import LocationCard from './components/LocationCard'
 
 function App() {
-  const { list } = useAutocompleteLocations();
-
+  const { locations } = useSelectedLocations()
   return (
-    <Container style={{margin: '4vh 2vw'}}>
-      <Col>
-        <Row>
+    <Grid container style={{ margin: '4vh 2vw' }}>
+      <Grid container item style={{ marginBottom: '1vh' }} alignContent="stretch" alignItems="stretch">
+        <Grid item>
           <AutocompleteInput />
-        </Row>
-        <Row>
-          <pre>
-            {JSON.stringify(list, null, 2)}
-          </pre>
-        </Row>
-      </Col>
-    </Container>
+        </Grid>
+      </Grid>
+      <Grid container item>
+        {locations
+          .map(location =>
+            <Grid item>
+              <LocationCard key={location.Key} location={location} />
+            </Grid>
+          )}
+      </Grid>
+    </Grid>
   );
 }
 
 export default App;
-
-
-
-const MyInput = ({ value, setValue }) => {
-
-
-  const handleOnChange = e => {
-    e.preventDefault();
-    setValue(e.target.value);
-  }
-  return <Form>
-    <Form.Group>
-      <Form.Control type="text" placeholder={"Search..."}
-        value={value}
-        onChange={handleOnChange} />
-    </Form.Group>
-  </Form>
-}
-

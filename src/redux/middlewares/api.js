@@ -1,9 +1,7 @@
 import { apiStart, apiEnd, apiError } from '../actions';
-const baseUrl = process.env.REACT_APP_BASE_URL;
+import { apiKey, baseUrl } from '../../constants/common';
 
 const createUrl = (path, urlParams = [], queryParams = {}) => {
-    const apiKey = process.env.REACT_APP_ACCU_WEATHER_API_KEY;
-
     let url = new URL(path, baseUrl);
 
     urlParams.forEach(param => {

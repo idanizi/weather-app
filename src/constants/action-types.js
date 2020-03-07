@@ -6,3 +6,4 @@ export const API_ERROR = 'API_ERROR';
 export const ShowLocations = 'ShowLocations';
 export const toast = 'toast'
 export const REMOVE_LOCATION = 'REMOVE_LOCATION'
+export const SET_LOCATION_FORECAST = 'SET_LOCATION_FORECAST'

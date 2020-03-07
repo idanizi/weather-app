@@ -33,3 +33,28 @@ export const removeLocation = (location) => ({
     type: actionTypes.REMOVE_LOCATION,
     payload: location,
 })
+
+export const apiCall = ({ url, body = undefined, urlParams = [],
+    queryParams = {}, method = 'GET', onSuccess, onFailure }) =>
+    ({
+        type: 'API',
+        payload: {
+            url,
+            body,
+            urlParams,
+            queryParams,
+            method,
+            onSuccess,
+            onFailure
+        }
+    })
+
+export const fetchForecast = (location) =>
+    apiCall({
+        url: 'currentconditions/v1/',
+        urlParams: [location.Key],
+        onSuccess: forecast => ({
+            type: actionTypes.SET_LOCATION_FORECAST,
+            payload: {location, forecast}
+        })
+    })
