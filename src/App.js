@@ -7,7 +7,7 @@ import LocationCard from './components/LocationCard'
 
 function App() {
   const { locations } = useSelectedLocations()
-  return (
+  return (<>
     <Grid container style={{ margin: '4vh 2vw' }}>
       <Grid container item style={{ marginBottom: '1vh' }} alignContent="stretch" alignItems="stretch">
         <Grid item>
@@ -23,6 +23,8 @@ function App() {
           )}
       </Grid>
     </Grid>
+    <footer>Made with <span style={{ color: "#f00" }}>❤</span> by Idan Izicovich</footer>
+  </>
   );
 }
 
