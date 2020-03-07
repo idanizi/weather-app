@@ -16,9 +16,7 @@ export default function LocationCard({ location }) {
     const { LocalObservationDateTime, WeatherText, IsDayTime,
         Temperature: { Metric: { Value, Unit } } } = forecast;
 
-    // FIXME: get local time
     const time = moment.parseZone(LocalObservationDateTime).format('ddd, MMM Do, HH:mm')
-    // const time = LocalObservationDateTime
 
     return (
         <Card>
