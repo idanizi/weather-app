@@ -30,7 +30,7 @@ export default (state = initState, action) =>
                 draft.autocomplete = action.payload;
                 break;
             case actionTypes.REMOVE_LOCATION:
-                _.remove(draft.locations, x => action.payload === x)
+                draft.locations = _.remove(draft.locations, x => action.payload === x)
                 draft.locationsToForecastsMap.delete(action.payload);
             break;
             case actionTypes.SET_LOCATION_FORECAST:

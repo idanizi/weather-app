@@ -14,10 +14,10 @@ function App() {
           <AutocompleteInput />
         </Grid>
       </Grid>
-      <Grid container item>
+      <Grid container item spacing={2}>
         {locations
           .map(location =>
-            <Grid item>
+            <Grid item key={location.Key}>
               <LocationCard key={location.Key} location={location} />
             </Grid>
           )}

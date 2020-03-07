@@ -13,11 +13,12 @@ export default function LocationCard({ location }) {
 
     if (!forecast) return <Skeleton />
 
-    const { EpochTime, WeatherText, WeatherIcon,
-        HasPrecipitation, PrecipitationType, IsDayTime,
+    const { LocalObservationDateTime, WeatherText, IsDayTime,
         Temperature: { Metric: { Value, Unit } } } = forecast;
 
-    const time = moment(EpochTime * 1e3).format('ddd, MMM Do, HH:mm')
+    // FIXME: get local time
+    const time = moment.parseZone(LocalObservationDateTime).format('ddd, MMM Do, HH:mm')
+    // const time = LocalObservationDateTime
 
     return (
         <Card>
@@ -33,14 +34,14 @@ export default function LocationCard({ location }) {
                 </Card.Subtitle>
 
                 <Grid container spacing={2}>
-                        <Grid item>
-                            {time}
-                        </Grid>
-                        <Grid item>
-                            <Badge variant="dark">
-                                {IsDayTime ? "Day" : "Night"}
-                            </Badge>
-                        </Grid>
+                    <Grid item>
+                        {time}
+                    </Grid>
+                    <Grid item>
+                        <Badge variant={IsDayTime ? "light": "dark"}>
+                            {IsDayTime ? "Day" : "Night"}
+                        </Badge>
+                    </Grid>
                 </Grid>
 
                 <Card.Text>
